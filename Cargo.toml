@@ -9,3 +9,4 @@ glob = "0.3.3"
 
 [dependencies]
 tonic = "0.14.1"
+prost = "0.14.1"
