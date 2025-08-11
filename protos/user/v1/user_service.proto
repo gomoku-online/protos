@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package user.v1;
+
+import "user/v1/user.proto";
+
+
+service UserService {
+  rpc CreateRandomNicknameUser(CreateRandomNicknameUserRequest) returns (CreateRandomNicknameUserResponse);
+
+  rpc FindUserByAuth(FindUserByAuthRequest) returns (FindUserByAuthResponse);
+}
+
+message CreateRandomNicknameUserRequest {
+  AuthProvider auth_provider = 1;
+  string auth_id = 2;
+}
+
+message CreateRandomNicknameUserResponse {
+  UserSummary user = 1;
+}
+
+message FindUserByAuthRequest {
+  AuthProvider auth_provider = 1;
+  string auth_id = 2;
+}
+
+message FindUserByAuthResponse {
+  optional UserSummary user = 1;
+}
