@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package user.v1;
+
+enum AuthProvider {
+  KEYCLOAK = 0;
+}
+
+message UserSummary {
+  string user_id = 1;
+  string nickname = 2;
+  bool active = 3;
+}
