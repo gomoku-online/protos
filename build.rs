@@ -4,9 +4,7 @@ use std::path::PathBuf;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=protos/");
 
-    let proto_files: Vec<PathBuf> = glob("protos/**/*.proto")?
-        .filter_map(Result::ok)
-        .collect();
+    let proto_files: Vec<PathBuf> = glob("protos/**/*.proto")?.filter_map(Result::ok).collect();
 
     if proto_files.is_empty() {
         println!("cargo:warning=No proto files found. Skipping protoc generation.");
@@ -18,10 +16,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     tonic_prost_build::configure()
         .build_server(true)
         .build_client(true)
-        .compile_protos(
-            &proto_files,
-            include_paths,
-        )?;
+        .compile_well_known_types(true)
+        .compile_protos(&proto_files, include_paths)?;
 
     Ok(())
 }
